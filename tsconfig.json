@@ -27,6 +27,7 @@
       "@interfaces/*": ["./src/core/interfaces/*"],
       "@libs/*": ["./src/core/libs/*"],
       "@providers": ["./src/core/providers/index"],
+      "@wrappers": ["./src/core/wrappers/index"],
       "@services": ["./src/core/services/index"],
       "@store": ["./src/core/store/index"],
       "@slices/*": ["./src/core/store/slices/*"],
