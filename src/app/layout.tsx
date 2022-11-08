@@ -1,12 +1,11 @@
 "use client";
 
-import { ProvidersWrapper } from "@wrappers";
+import { ReactNode } from "react";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+import { ProvidersWrapper } from "@wrappers";
+import "@styles/globals.css";
+
+const RootLayout = ({ children }: TRootLayout) => {
   return (
     <html>
       <head></head>
@@ -15,4 +14,10 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+type TRootLayout = {
+  children: ReactNode;
+};
+
+export default RootLayout;
