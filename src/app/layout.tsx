@@ -9,7 +9,7 @@ const RootLayout = ({ children }: TRootLayout) => {
   return (
     <html>
       <head></head>
-      <body>
+      <body className="font-display">
         <ProvidersWrapper>{children}</ProvidersWrapper>
       </body>
     </html>
