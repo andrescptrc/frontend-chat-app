@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import ReactQueryWrapper from "./react-query";
 import ReduxWrapper from "./redux";
 
-const Wrappers = ({ children }: TWrappers) => {
+const ProvidersWrapper = ({ children }: TProvidersWrapper) => {
   return (
     <ReduxWrapper>
       <ReactQueryWrapper>{children}</ReactQueryWrapper>
@@ -11,8 +11,8 @@ const Wrappers = ({ children }: TWrappers) => {
   );
 };
 
-type TWrappers = {
+type TProvidersWrapper = {
   children: ReactNode;
 };
 
-export default Wrappers;
+export default ProvidersWrapper;

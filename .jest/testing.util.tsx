@@ -4,7 +4,7 @@ import { RootState, RootStore, setupStore } from "../src/core/store";
 import React, { PropsWithChildren, ReactElement } from "react";
 import { PreloadedState } from "@reduxjs/toolkit";
 
-import Wrappers from "../src/core/wrappers/wrappers";
+import ProvidersWrapper from "../src/core/wrappers/providers-wrapper";
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {
   preloadedState?: PreloadedState<RootState>;
@@ -16,7 +16,7 @@ export function renderWithProviders(
   { store = setupStore(), ...renderOptions }: ExtendedRenderOptions = {}
 ) {
   const RootProvidersWrapper = ({ children }: PropsWithChildren) => {
-    return <Wrappers>{children}</Wrappers>;
+    return <ProvidersWrapper>{children}</ProvidersWrapper>;
   };
 
   return {
