@@ -1,12 +1,28 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
-import { Button, InputField } from '@atoms';
 import { loginSchema } from '../schemas/login-schema';
+import { Button, ErrorMessage, InputField } from '@atoms';
+
+import { TLoginForm } from '@interfaces/auth';
+import { authService } from '@services';
 
 const LoginForm = () => {
+  const {
+    mutate: loginMutate,
+    isLoading,
+    error
+  } = useMutation(async (data: TLoginForm) => await authService.login(data), {
+    onSuccess: data => {
+      console.log(data);
+    }
+  });
+
+  const errorM = error as TError;
+
   const {
     handleSubmit: onSubmit,
     register,
@@ -16,7 +32,7 @@ const LoginForm = () => {
   });
 
   const handleSubmit = (data: TLoginForm) => {
-    console.log(data);
+    loginMutate(data);
   };
 
   return (
@@ -40,16 +56,15 @@ const LoginForm = () => {
         />
       </div>
 
+      {errorM && <ErrorMessage error={errorM.message as string} />}
+
       <div className="flex">
-        <Button className="rounded w-full">Login</Button>
+        <Button className="rounded w-full">
+          {isLoading ? 'Loading...' : 'Login'}
+        </Button>
       </div>
     </form>
   );
-};
-
-type TLoginForm = {
-  email: string;
-  password: string;
 };
 
 export default LoginForm;
