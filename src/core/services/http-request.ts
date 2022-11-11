@@ -1,6 +1,8 @@
 import axios from 'axios';
+import jsCookie from 'js-cookie';
 
 import { catchError } from '@libs/axios.lib';
+import { TOKEN_NAME } from '@constants/auth';
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -18,6 +20,16 @@ class HttpService {
 
   protected getPath() {
     return `${BASE_URL}${this.endpoint}`;
+  }
+
+  protected useToken(jwt?: string) {
+    const token = jwt || jsCookie.get(TOKEN_NAME);
+    this.headers = {
+      ...this.headers,
+      ...(token && {
+        Authorization: token
+      })
+    };
   }
 
   protected async get<R>(): Promise<R> {

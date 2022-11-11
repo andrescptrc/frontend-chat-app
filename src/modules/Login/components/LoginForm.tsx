@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 
@@ -9,15 +9,23 @@ import { Button, ErrorMessage, InputField } from '@atoms';
 
 import { TLoginForm } from '@interfaces/auth';
 import { authService } from '@services';
+import { IS_AUTHENTICATED } from '@constants/react-query-cache-keys';
+import { login } from '@utils/auth';
 
 const LoginForm = () => {
+  const queryClient = useQueryClient();
+
   const {
     mutate: loginMutate,
     isLoading,
     error
   } = useMutation(async (data: TLoginForm) => await authService.login(data), {
     onSuccess: data => {
-      console.log(data);
+      login(data.token);
+
+      queryClient.invalidateQueries([IS_AUTHENTICATED]);
+
+      queryClient.setQueryData([IS_AUTHENTICATED], true);
     }
   });
 

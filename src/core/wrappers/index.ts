@@ -1,3 +1,4 @@
-export { default as ReactQueryWrapper } from "./react-query";
-export { default as ReduxWrapper } from "./redux";
-export { default as ProvidersWrapper } from "./providers-wrapper";
+export { default as ReactQueryWrapper } from './ReactQueryWrapper';
+export { default as ReduxWrapper } from './ReduxWrapper';
+export { default as AuthWrapper } from './AuthWrapper';
+export { default as ProvidersWrapper } from './ProvidersWrapper';
